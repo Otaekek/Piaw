@@ -1,0 +1,17 @@
+newmtl front
+map_Kd front.tga
+
+newmtl back
+map_Kd back.tga
+
+newmtl top
+map_Kd top.tga
+
+newmtl right
+map_Kd right.tga
+
+newmtl left
+map_Kd left.tga
+
+newmtl bottom
+map_Kd bottom.tga
