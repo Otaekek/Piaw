@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-#define DEFAULT_ALLOC_SIZE 204800000
+#define DEFAULT_ALLOC_SIZE 2048000000
 
 class stackAllocator {
 

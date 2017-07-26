@@ -38,14 +38,20 @@ LDFLAGS +=  -rdynamic
 SOURCES += main.cpp
 
 # cube map
-SRC_SUBDIR += cube_map
-SOURCES += mesher_emit_vertex.cpp
-SOURCES += mesher.cpp
-SOURCES += surfaceNetMesher.cpp
-CFLAGS	+= -Isrc/cube_map
-SOURCES += cubeMap.class.cpp
-SOURCES += perlinNoise.cpp
-SOURCES += terrainGeneration.cpp
+# SRC_SUBDIR += cube_map
+# SOURCES += mesher_emit_vertex.cpp
+# SOURCES += mesher.cpp
+# SOURCES += surfaceNetMesher.cpp
+# CFLAGS	+= -Isrc/cube_map
+# SOURCES += cubeMap.class.cpp
+# SOURCES += perlinNoise.cpp
+# SOURCES += terrainGeneration.cpp
+
+# Piaw Ennemy
+
+SRC_SUBDIR += piaw_ennemy
+SOURCES += ennemy.class.cpp
+CFLAGS += -Isrc/piaw_ennemy
 
 # memory allocator
 SRC_SUBDIR += memory_allocator
@@ -75,7 +81,7 @@ SOURCES += onScreenRenderPass.cpp
 SOURCES += renderDataSys.class.cpp
 SOURCES += complexObjectRenderingPipeline.cpp
 SOURCES += renderBuiltIn.class.cpp
-SOURCES += voxRenderer.cpp
+#SOURCES += voxRenderer.cpp
 
 # jb system
 SRC_SUBDIR += job_system
@@ -137,10 +143,10 @@ SRC_SUBDIR += runtime_library
 CFLAGS += -Isrc/runtime_library
 SOURCES += runtimeLibrary.class.cpp
 
-#Voxels physic
-SRC_SUBDIR += voxPhysic
-SOURCES += voxPhysic.class.cpp
-CFLAGS += -Isrc/voxPhysic
+# #Voxels physic
+# SRC_SUBDIR += voxPhysic
+# SOURCES += voxPhysic.class.cpp
+# CFLAGS += -Isrc/voxPhysic
 
 # GUI Event System
 SRC_SUBDIR += GUI

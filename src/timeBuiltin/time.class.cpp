@@ -40,7 +40,7 @@ void	timeBuiltin::update()
 
 double	timeBuiltin::get_time()
 {
-	return glfwGetTime ();
+	return glfwGetTime();
 }
 
 double	timeBuiltin::delta_time()

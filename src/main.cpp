@@ -27,25 +27,27 @@
 #include <directorySmartLoader.class.hpp>
 #include <runtimeLibrary.class.hpp>
 #include <GUIEventSystem.class.hpp>
-#include <cubeMap.class.hpp>
-#include <mesher.hpp>
-#include <voxPhysic.class.hpp>
+//#include <cubeMap.class.hpp>
+//#include <mesher.hpp>
+//#include <voxPhysic.class.hpp>
 #include <time.class.hpp>
+#include <ennemy.class.hpp>
+#include <time.h>
 
 void init()
 {
+	srand(clock());
 	dynamicMemoryManager::init();
 	texture_builtin::init();
 	transformBuiltin::init();
 	fileLoader::init();
 	renderBuiltIn::init();
-	cubeMap::init();
 	jobHandler::init();
 	renderDataSys::init();
 	inputBuiltin::init();
-	voxPhysic::init();
+//	voxPhysic::init();
 	basicFPSControlManagerBuiltin::init();
-	mapEditorBuiltin::init();
+//	mapEditorBuiltin::init();
 	timeBuiltin::init();
 	runtimeLibrary::create_lib("assets/levelBuilder/startEngine");
 }
@@ -55,11 +57,12 @@ void update()
 	timeBuiltin::update();
 	renderBuiltIn::update();
 	inputBuiltin::update();
-	voxPhysic::update();
+///	voxPhysic::update();
 	basicFPSControlManagerBuiltin::update();
 	staticMeshManager::update();
-//	terrainGenerationBuiltin::update();
-//		basicLightFactory::update();
+	terrainGenerationBuiltin::update();
+	basicLightFactory::update();
+	EnnemyManager::update();
 //	mapEditorBuiltin::update();
 	renderBuiltIn::swap_buffer();
 }

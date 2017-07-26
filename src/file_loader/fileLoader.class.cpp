@@ -190,7 +190,6 @@ void 			fileLoader::load_obj(void *data)
 	if (scene == NULL)
 	{
 		staticMemoryManager::set_asset_state(staticMemoryManager::E_ERR, loadHeader->ref);
-
 		printf("Error when loading %s: %s.\n", path, (importer.GetErrorString()));
 		return ;
 	}

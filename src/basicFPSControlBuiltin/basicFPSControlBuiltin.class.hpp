@@ -19,7 +19,6 @@
 #include <renderBuiltIn.class.hpp>
 #include <fileLoader.class.hpp>
 #include <inputBuiltin.class.hpp>
-#include <voxPhysic.class.hpp>
 
 #define MAX_ELEM 64
 
@@ -37,11 +36,8 @@ public:
 
 private:
 
-	uint32_t	renderGO;
-	uint32_t	_renderGOTransform;
 	uint32_t	_cameraHandler;
-	uint32_t	_rigidBodyHandler;
-	
+
 	void 		render();
 	void 		behave();
 	float 		relx;

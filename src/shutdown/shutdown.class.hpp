@@ -9,7 +9,7 @@
 #include <renderBuiltIn.class.hpp>
 #include <terrainGenerationBuiltin.class.hpp>
 #include <FreeImage.h>
-#include <cubeMap.class.hpp>
+//#include <cubeMap.class.hpp>
 
 class shutdown {
 

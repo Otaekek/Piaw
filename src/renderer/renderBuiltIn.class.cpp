@@ -129,7 +129,7 @@ void 			renderBuiltIn::init()
 	skybox->transformHandler = transformBuiltin::create();
 	transformBuiltin::scale(skybox->transformHandler, 1000, 1000, 1000);
 	glFrontFace(GL_CCW);
-	init_vox();
+//	init_vox();
 	printf("%s\n", glGetString(GL_VERSION));
 	glfwFocusWindow(window);
 }
@@ -179,8 +179,6 @@ void			renderBuiltIn::update()
 	{
 		camera = renderBuiltIn::get_camera(_cameras[i]);
 		t_transform *transform = transformBuiltin::get_transform(camera->transformHandler);
-		if (transform->position.y > 200)
-			continue ;
 		glViewport(camera->posx * mode->width, camera->posy * mode->height, camera->sizex * mode->width, camera->sizey * mode->height);
 		render_skybox(camera);
 	}
@@ -189,7 +187,7 @@ void			renderBuiltIn::update()
 		camera = renderBuiltIn::get_camera(_cameras[i]);
 		glViewport(camera->posx * mode->width, camera->posy * mode->height, camera->sizex * mode->width, camera->sizey * mode->height);
 		renderBuiltIn::render(camera);
-		renderBuiltIn::renderVox(*camera, mode->width, mode->height);
+//		renderBuiltIn::renderVox(*camera, mode->width, mode->height);
 	}
 	numCamera = 0;
 	sizeList = 0;
