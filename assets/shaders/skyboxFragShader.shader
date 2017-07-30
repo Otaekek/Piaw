@@ -18,5 +18,5 @@ void main(void)
 		FragColor = vec4(diffuse.xyz * sunlight, 1);
 	else
 		FragColor = vec4(texture(textDiffuse, uv).rgb * sunlight, 1);// * vec4(0.7, 0.2, 0.2, 1);
-	//FragColor *= 2;
+//	FragColor /= 2;
 }

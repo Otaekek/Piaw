@@ -45,8 +45,8 @@ void renderBuiltIn::renderVox(t_camera camera, float width, float height)
 	glm::vec3 pos = {0, 0, 0};
 	uint32_t coord[3];
 	float fcoord[3];
-	uint32_t range = 17;
-	uint32_t rangey = 6;
+	uint32_t range = 5;
+	uint32_t rangey = 3;
 
 	int32_t			cx[16048];
 	int32_t			cy[16048];
@@ -69,8 +69,6 @@ void renderBuiltIn::renderVox(t_camera camera, float width, float height)
 		for (int j = 0; j < rangey; j++)
 			for (int k = 0; k < range; k++)
 			{
-				if (-transform->position.y + (CHUNK_SIZE * SIZE_BLOCK * (j - rangey / 2)) < 0 && (i < range / 2 - 4 || i > range / 2 + 4 || k < range / 2 - 4 || k > range / 2 + 4))
-					continue ;
 				cx[size] = CHUNK_SIZE * (i - range / 2) + coord[0];
 				cy[size] = CHUNK_SIZE * (j - rangey / 2) + coord[1];
 				cz[size] = CHUNK_SIZE * (k - range / 2) + coord[2];
@@ -80,7 +78,6 @@ void renderBuiltIn::renderVox(t_camera camera, float width, float height)
 				t.position.z = fcoord[2];
 				if (!cull(transform->position.x, transform->position.z, t, camera.transformHandler, 0.41))
 					continue ;
-
 				size++;
 			}
 

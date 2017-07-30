@@ -43,12 +43,4 @@ void main(void)
 	t.xy += tables[material].xy;
 	
 	FragColor = vec4(texture(textDiffuse, t * 0.0625).rgb, 1) * a;
-	if (pos_color.y < 180)
-	{
-		FragColor = mix(vec4(0.3, 0.4, 0.7, 1), FragColor, 0.3);
-	}
-	return ;
-	a = (distance(camPos, pos_color) + 0)/ 18000;
-		a = clamp(a, 0 , 1);
-	FragColor = FragColor * (1.5f - a) + vec4(1,1,1,1) * a;
 }

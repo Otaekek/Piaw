@@ -73,14 +73,16 @@ void	renderDataSys::execute_vao_request()
 void 			renderDataSys::init()
 {
 	_programm[0] = load_programVertexFrag("assets/shaders/basicVertexShader.shader", "assets/shaders/basicFragShader.shader");
+	_programm[6] = load_programVertexFrag("assets/shaders/instancedBoxVertexShader.shader", "assets/shaders/veryBasicFragShader.shader");
+//	_programm[6] = load_programVertexFrag("assets/shaders/basicVertexShader.shader", "assets/shaders/veryBasicFragShader.shader");
 	_programm[1] = load_programVertexFrag("assets/shaders/skyboxVertexShader.shader", "assets/shaders/skyboxFragShader.shader");
 	_programm[2] = load_programVertexFrag("assets/shaders/onScreenVertexShader.shader", "assets/shaders/onScreenFragShader.shader");
 	_programm[3] = load_programVertexFrag("assets/shaders/voxVertexShader.shader", "assets/shaders/voxFragShader.shader");
 	_programm[4] = load_programVertexFrag("assets/shaders/isoVoxVertexShader.shader", "assets/shaders/isoVoxFragShader.shader");
-	_programm[5] = load_programTesselation("assets/shaders/tesselationVertexShader.shader",
-		"assets/shaders/tesselationFragShader.shader",
-		"assets/shaders/tesselationEvaluationShader.shader",
-		"assets/shaders/tesselationControlShader.shader");
+	//_programm[5] = load_programTesselation("assets/shaders/tesselationVertexShader.shader",
+	//	"assets/shaders/tesselationFragShader.shader",
+	//	"assets/shaders/tesselationEvaluationShader.shader",
+	//	"assets/shaders/tesselationControlShader.shader");
 }
 
 void 			renderDataSys::shutdown()
@@ -462,7 +464,6 @@ void renderDataSys::iterNode(t_node node, glm::vec3 translation, float angle, gl
 	}
 	for (int i = 0; i < node.childNum; i++)
 		iterNode(*(t_node*)(staticMemoryManager::get_data_ptr(node.child[i])), translation, angle, axis);
-
 }
 
 void renderDataSys::modifyVertices(uint32_t assetHandler, glm::vec3 translation, float angle, glm::vec3 axis)

@@ -27,12 +27,11 @@
 #include <directorySmartLoader.class.hpp>
 #include <runtimeLibrary.class.hpp>
 #include <GUIEventSystem.class.hpp>
-//#include <cubeMap.class.hpp>
-//#include <mesher.hpp>
-//#include <voxPhysic.class.hpp>
 #include <time.class.hpp>
-#include <ennemy.class.hpp>
 #include <time.h>
+#include <piawMap.class.hpp>
+#include <piawLineEntity.class.hpp>
+#include <particleSystem.class.hpp>
 
 void init()
 {
@@ -46,7 +45,10 @@ void init()
 	renderDataSys::init();
 	inputBuiltin::init();
 //	voxPhysic::init();
+//	cubeMap::init();
 	basicFPSControlManagerBuiltin::init();
+	piawMap::init();
+	particleSystem::init();
 //	mapEditorBuiltin::init();
 	timeBuiltin::init();
 	runtimeLibrary::create_lib("assets/levelBuilder/startEngine");
@@ -59,10 +61,12 @@ void update()
 	inputBuiltin::update();
 ///	voxPhysic::update();
 	basicFPSControlManagerBuiltin::update();
+	piawMap::update();
+	piawLineEntityManager::update();
+	particleSystem::update();
 	staticMeshManager::update();
 	terrainGenerationBuiltin::update();
 	basicLightFactory::update();
-	EnnemyManager::update();
 //	mapEditorBuiltin::update();
 	renderBuiltIn::swap_buffer();
 }

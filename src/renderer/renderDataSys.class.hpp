@@ -21,7 +21,9 @@ enum E_SHADER {
 	E_SKYBOX,
 	E_ONSCREEN,
 	E_VOX,
-	E_ISOVOX
+	E_ISOVOX,
+	E_TESSELATION,
+	E_PIAWCUBE
 };
 
 enum E_LIGHT {
@@ -118,7 +120,7 @@ typedef	struct		s_node {
 	uint32_t		meshs;
 	uint32_t 		child[12];
 	uint32_t		childNum;
-
+	uint32_t		instanceNum;
 }					t_node;
 
 class renderDataSys {

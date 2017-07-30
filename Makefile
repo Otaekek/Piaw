@@ -1,4 +1,4 @@
-NAME = voxEngine
+NAME = piaw
 CFLAGS = -pthread -std=c++11 -o3
 UNAME_S := $(shell uname -s)
 #CFLAGS += -Wall -Werror -Wextra
@@ -37,21 +37,35 @@ LDFLAGS +=  -rdynamic
 # main
 SOURCES += main.cpp
 
+#piawMap
+SRC_SUBDIR += piaw_map_manager
+SOURCES += piawMap.class.cpp
+CFLAGS += -Isrc/piaw_map_manager
+
 # cube map
-# SRC_SUBDIR += cube_map
+ SRC_SUBDIR += cube_map
 # SOURCES += mesher_emit_vertex.cpp
 # SOURCES += mesher.cpp
 # SOURCES += surfaceNetMesher.cpp
-# CFLAGS	+= -Isrc/cube_map
+CFLAGS	+= -Isrc/cube_map
 # SOURCES += cubeMap.class.cpp
-# SOURCES += perlinNoise.cpp
+SOURCES += perlinNoise.cpp
 # SOURCES += terrainGeneration.cpp
 
-# Piaw Ennemy
+# Piaw line entity
+SRC_SUBDIR += piaw_line_entity
+SOURCES += piawLineEntity.class.cpp
+CFLAGS += -Isrc/piaw_line_entity
 
-SRC_SUBDIR += piaw_ennemy
-SOURCES += ennemy.class.cpp
-CFLAGS += -Isrc/piaw_ennemy
+# Piaw player spaceship
+SRC_SUBDIR += piaw_player_spaceship
+SOURCES += piawPlayerSpaceShip.class.cpp
+CFLAGS += -Isrc/piaw_player_spaceship
+
+#partcle system
+SRC_SUBDIR += particle_system
+CFLAGS += -Isrc/particle_system
+SOURCES += particleSystem.class.cpp
 
 # memory allocator
 SRC_SUBDIR += memory_allocator
@@ -81,6 +95,7 @@ SOURCES += onScreenRenderPass.cpp
 SOURCES += renderDataSys.class.cpp
 SOURCES += complexObjectRenderingPipeline.cpp
 SOURCES += renderBuiltIn.class.cpp
+SOURCES	+= renderBuiltInInstancing.class.cpp
 #SOURCES += voxRenderer.cpp
 
 # jb system

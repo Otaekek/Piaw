@@ -52,6 +52,7 @@ public:
 	static void			reset(uint32_t ref);
 	static glm::quat	CreateFromAxisAngle(glm::vec3 axis, float angle);
 	static glm::quat 	LookAt(glm::vec3 d);
+	static glm::quat	LookAtObject(glm::vec3 d);
 
 private:
 	static uint32_t 	cluster_id;

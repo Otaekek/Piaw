@@ -46,7 +46,8 @@ void		cubeMap::shutdown()
 t_block		*cubeMap::get_block_at(uint32_t i, uint32_t j, uint32_t k)
 {
 	t_chunk *chunk;
-	chunk = get_unloaded_chunk((i / CHUNK_SIZE) * CHUNK_SIZE, (j / CHUNK_SIZE) * CHUNK_SIZE, (k / CHUNK_SIZE) * CHUNK_SIZE);
+
+	chunk = get_chunk_at(i, j, k);
 	return &(chunk->blocks[i % CHUNK_SIZE][j % CHUNK_SIZE][k % CHUNK_SIZE]);
 }
 
@@ -190,7 +191,7 @@ t_chunk		*cubeMap::get_unloaded_chunk(int32_t i, int32_t j, int32_t k)
 	t_chunk			*ret;
 
 	uint32_t a = (i / CHUNK_SIZE) % MAX_CHUNK_SIZE;
-	uint32_t b = (j / CHUNK_SIZE);
+	uint32_t b = j / CHUNK_SIZE;
 	uint32_t c = (k / CHUNK_SIZE) % MAX_CHUNK_SIZE;
 	ref = hyper_chunk->chunks[a][b][c];
 	if (ref == 0)
@@ -220,48 +221,6 @@ t_chunk			*cubeMap::get_chunk_at(uint32_t i, uint32_t j, uint32_t k)
 
 void		cubeMap::set_block_at(uint32_t i, uint32_t j, uint32_t k, t_block block)
 {
-	t_mesh_job_data jbdt;
-	t_chunk *chunk = get_chunk_at(i / CHUNK_SIZE * CHUNK_SIZE, j / CHUNK_SIZE * CHUNK_SIZE, k / CHUNK_SIZE * CHUNK_SIZE);
-	t_block *b = get_block_at(i, j, k);
-	t_chunk *l = get_chunk_at((i - CHUNK_SIZE) / CHUNK_SIZE * CHUNK_SIZE, j / CHUNK_SIZE * CHUNK_SIZE, k / CHUNK_SIZE * CHUNK_SIZE);
-	t_chunk *lf = get_chunk_at((i - CHUNK_SIZE) / CHUNK_SIZE * CHUNK_SIZE, j / CHUNK_SIZE * CHUNK_SIZE, (k - CHUNK_SIZE) / CHUNK_SIZE * CHUNK_SIZE);
-	t_chunk *t = get_chunk_at(i / CHUNK_SIZE * CHUNK_SIZE, (j - 2 *CHUNK_SIZE) / CHUNK_SIZE * CHUNK_SIZE, k / CHUNK_SIZE * CHUNK_SIZE);
-	t_chunk *f = get_chunk_at(i / CHUNK_SIZE * CHUNK_SIZE, j / CHUNK_SIZE * CHUNK_SIZE, (k - CHUNK_SIZE) / CHUNK_SIZE * CHUNK_SIZE);
-	
-	if (block.type == b->type)
-		return ;
-	if (i % CHUNK_SIZE < 2)
-	{
-		l->blocks[(i % CHUNK_SIZE) + CHUNK_SIZE][j % CHUNK_SIZE][k % CHUNK_SIZE] = block;
-		l->meshed = 0;
-	}
-	if (j % CHUNK_SIZE < 2)
-	{
-		t->blocks[(i % CHUNK_SIZE)][j % CHUNK_SIZE + CHUNK_SIZE][k % CHUNK_SIZE] = block;
-		t->meshed = 0;
-	}
-	if (k % CHUNK_SIZE < 2)
-	{
-		f->blocks[(i % CHUNK_SIZE)][j % CHUNK_SIZE][(k % CHUNK_SIZE) + CHUNK_SIZE] = block;
-		f->meshed = 0;
-	}
-	if (i % CHUNK_SIZE < 2 || k % CHUNK_SIZE < 2)
-	{
-		lf->blocks[(i % CHUNK_SIZE) + CHUNK_SIZE][j % CHUNK_SIZE][(k % CHUNK_SIZE) + CHUNK_SIZE] = block;
-		lf->meshed = 0;
-	}
-	*b = block;
-	chunk->meshed = 0;
-	jbdt.chunk = lf;
-	mesh(&jbdt);
-	jbdt.chunk = l;
-	mesh(&jbdt);
-	jbdt.chunk = t;
-	mesh(&jbdt);
-	jbdt.chunk = f;
-	mesh(&jbdt);
-	jbdt.chunk = chunk;
-	mesh(&jbdt);
 }
 
 void		cubeMap::convert_coord(uint32_t out_coord[3], float x, float y, float z)
@@ -285,9 +244,9 @@ void		cubeMap::convert_coord_to_world(float out_coord[3], uint32_t i, uint32_t j
 	out_coord[1] = j;
 	out_coord[2] = k;
 
-	out_coord[0] -= (MAX_CHUNK_SIZE * CHUNK_SIZE * HYPER_CHUNK_SIZE) / 2 - 8;
+	out_coord[0] -= (MAX_CHUNK_SIZE * CHUNK_SIZE * HYPER_CHUNK_SIZE) / 2;
 	out_coord[1] -= (MAX_CHUNK_SIZE_Y * CHUNK_SIZE * HYPER_CHUNK_SIZE_Y) / 2 - 8;
-	out_coord[2] -= (MAX_CHUNK_SIZE * CHUNK_SIZE * HYPER_CHUNK_SIZE) / 2 - 8;
+	out_coord[2] -= (MAX_CHUNK_SIZE * CHUNK_SIZE * HYPER_CHUNK_SIZE) / 2;
 
 	out_coord[0] *= SIZE_BLOCK;
 	out_coord[1] *= SIZE_BLOCK;
@@ -409,8 +368,8 @@ void		cubeMap::mesh(void *data)
 		if (!mesh_data.chunk->meshed)
 		{
 			((t_renderVox*)(dynamicMemoryManager::get_ptr(mesh_data.chunk->renderGO)))->program = E_ISOVOX;
-			id_mem = (GLuint*)malloc(sizeof(float) * 3966309 * 3 * 4);
-			v_mem = (float*)malloc(sizeof(float) * 3966309 * 3 * 4);
+			id_mem = (GLuint*)malloc(sizeof(float) * 3966309 * 3);
+			v_mem = (float*)malloc(sizeof(float) * 3966309 * 3);
 			iso_mesher.get_vertex(*(mesh_data.chunk), v_mem, id_mem, &size_array);
 			if (size_array == 0)
 			{

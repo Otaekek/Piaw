@@ -116,7 +116,7 @@ void 			renderBuiltIn::init()
 	window = glfwCreateWindow(mode->width, mode->height , "jojishiGameEngine", q, NULL);
 	glfwMakeContextCurrent(window);
 //	create_framebuffer();
-	glClearColor(0, 0, 0, 0);
+	glClearColor(0, 1.0, 0, 0);
 	glfwSwapInterval(1);
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -187,6 +187,7 @@ void			renderBuiltIn::update()
 		camera = renderBuiltIn::get_camera(_cameras[i]);
 		glViewport(camera->posx * mode->width, camera->posy * mode->height, camera->sizex * mode->width, camera->sizey * mode->height);
 		renderBuiltIn::render(camera);
+		renderBuiltIn::render_instanced(camera);
 //		renderBuiltIn::renderVox(*camera, mode->width, mode->height);
 	}
 	numCamera = 0;

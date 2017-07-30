@@ -1,7 +1,7 @@
+
 #include "renderBuiltIn.class.hpp"
 
-
-void			renderBuiltIn::render_mesh(t_renderMeshData *mesh, t_renderGO *elem, uint32_t program)
+void			renderBuiltIn::render_mesh(t_renderMeshData *mesh, t_renderGO *elem, uint32_t program, uint32_t instanceNum)
 {
 	GLuint location;
 	glActiveTexture(GL_TEXTURE0);
@@ -61,23 +61,22 @@ void			renderBuiltIn::push_light(t_renderGO *elem, GLuint program)
 	glUniform3fv(location, _numLight * 4, array);
 }
 
-void			renderBuiltIn::render_node(t_node node, t_renderGO *elem, uint32_t program)
+void			renderBuiltIn::render_node(t_node node, t_renderGO *elem, uint32_t program, uint32_t instanceNum)
 {
 	t_renderMeshData	*mesh;
 	bool				mesh_has_child;
-
 	if (node.has_mesh)
 	{
 		mesh = (t_renderMeshData*)staticMemoryManager::get_data_ptr(node.meshs);
 		do
 		{
-			render_mesh(mesh, elem, program);
+			render_mesh(mesh, elem, program, instanceNum);
 			mesh_has_child = mesh->has_child;
 			mesh = (t_renderMeshData*)staticMemoryManager::get_data_ptr(mesh->child);
 		}	while (mesh_has_child);
 	}
 	for (int i = 0; i < node.childNum; i++)
-		render_node(*(t_node*)(staticMemoryManager::get_data_ptr(node.child[i])), elem, program);
+		render_node(*(t_node*)(staticMemoryManager::get_data_ptr(node.child[i])), elem, program, instanceNum);
 }
 
 bool			cull_mesh(glm::mat4 modelMat, glm::mat4 cameraMat, float maxDist, glm::mat4 perspectiveMat)
@@ -113,7 +112,7 @@ void 			renderBuiltIn::render_object(t_renderGO *elem, t_camera *camera)
 	if (!(elem->cameraLayer & camera->cameraLayer) && !((elem->cameraLayer + camera->cameraLayer) == 0))
 		return ;
 	node = (t_node*)staticMemoryManager::get_data_ptr(elem->assetHandler);
-	modelMat = transformBuiltin::to_mat(elem->transformHandler);
+		modelMat = transformBuiltin::to_mat(elem->transformHandler);
 	viewMat = transformBuiltin::to_mat_cam(camera->transformHandler);
 	projMat = transformBuiltin::projection_matrix(80.0f, 1.0f, 10000.0f,
 		(float)(mode->width * camera->sizex) / (mode->height * camera->sizey));
@@ -135,5 +134,5 @@ void 			renderBuiltIn::render_object(t_renderGO *elem, t_camera *camera)
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMat));
 
 	//if (cull_mesh(modelMat, viewMat, 500, projMat))
-	render_node(*node, elem, node->program);
+	render_node(*node, elem, node->program, node->instanceNum);
 }

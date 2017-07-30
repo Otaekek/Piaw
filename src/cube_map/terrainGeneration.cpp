@@ -13,18 +13,6 @@ e_block cave(uint32_t x, uint32_t y, uint32_t z, uint32_t seedz, t_noise *noise)
 
 e_block hill(uint32_t x, uint32_t y, uint32_t z, uint32_t seedz, t_noise *noise)
 {
-	/*
-		float da = noise2(noise, (float)(x % CHUNK_SIZE) * 30 ,(float)(z % CHUNK_SIZE) * 30);
-	da *= 5;
-	
-	if (y % CHUNK_SIZE < da)
-		return E_GRASS;
-	return E_EMPTY;
-	if (!((x) % 16) &&!(y % 16)&&!(z % 16))
-	{
-		return E_GRASS;
-	}
-	return E_EMPTY;*/
 	float a = noise2(noise, (float)x / 300,(float)z/300);
 	a /= 2;
 	a += 0.5;
@@ -192,54 +180,13 @@ e_block sky(uint32_t x, uint32_t y, uint32_t z, uint32_t seedz, t_noise *noise)
 
 e_block mountain(uint32_t x, uint32_t y, uint32_t z, uint32_t seedz, t_noise *noise)
 {
-	float a = noise2(noise, (float)x / 300,(float)z/300);
-	a /= 2;
-	a += 0.5;
-	a *= 7;
-	float b = noise2(noise, (float)x / 100,(float)z/100);
-	b *= 5;
-
-	float t = noise2(noise, (float)x / 100,(float)z/100);
-	t *= 1;
-
-	float c = noise2(noise, (float)x / 10,(float)z/10);
-	c *= 1;
-
-	float d = noise2(noise, (float)x * 30 ,(float)z * 30);
-	d *= 5;
-
-//	a = b + c;
-	a = c + a + b;
-	a /= 2;
-	a = pow(a, 1.9);
-	a -= t - 4;
-//	a -= t - 5;
-	y -= 4;
-	if (y % (4 * CHUNK_SIZE) < (a) || y == 257)
-	{
-		if (((int)b ^ (int)(d / 3) << (int)b) > 248)
-			return (E_ROCK);
-		if (y % (4 * CHUNK_SIZE) > CHUNK_SIZE / 2 + d + 10)
-			return (E_SNOW);
-		if (y % (4 * CHUNK_SIZE) < 6)
-			return E_SAND;
-		float q = noise3(noise, (float)x / 10,(float)z / 10, (float)y/10);
-		q /= 2;
-		q += 0.5;
-		q *= 40;
-		if (q < y % (4 * CHUNK_SIZE))
-			return E_EMPTY;
-		return (E_GRASS);
-	}
-	else if (d > 3 && y % (4 * CHUNK_SIZE) < a + d && !(x % 6) && !(z % 6))
-		return (E_WOOD);
-	return (E_EMPTY);
+	
 }
 
 int get_biom(uint32_t x, uint32_t y, uint32_t z, uint32_t seedz)
 {
 	if (y < 334 && y > 240)
-		return (1);
+		return (0);
 	//if (y >= 334)
 	//	return 8;
 	return (3);

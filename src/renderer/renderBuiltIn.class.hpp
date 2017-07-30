@@ -42,6 +42,13 @@ typedef struct	s_vox
 	uint32_t	program;
 }				t_renderVox;
 
+typedef struct	s_instanceRenderer {
+	uint32_t	assetHandler;
+	uint32_t	vao;
+	uint32_t	vbo;
+	uint32_t	num;
+}				t_instanceRenderer;
+
 class renderBuiltIn {
 
 public :
@@ -79,6 +86,13 @@ public :
 	static void						destroyVox(uint32_t ref);
 
 	static void						swap_buffer();
+
+	static GLuint					init_instancing(uint32_t vaoId);
+	static void						stream_transform(uint32_t vao, uint32_t vbo, float *data, uint32_t n);
+	static t_instanceRenderer		create_instancing(uint32_t assetHandler);
+	static void						render_me_instanced(t_instanceRenderer ir, uint32_t num, float *data);
+	static void						render_instanced(t_camera *camera);
+
 private :
 
 	static uint32_t					vox_tex;
@@ -108,8 +122,8 @@ private :
 	static GLuint					_frameBufferid;
 	static GLuint					_quadVertexbuffer;
 	static void						render(t_camera *camera);
-	static void						render_node(t_node node, t_renderGO *elem, uint32_t program);
-	static void						render_mesh(t_renderMeshData *mesh, t_renderGO *elem, uint32_t program);
+	static void						render_node(t_node node, t_renderGO *elem, uint32_t program, uint32_t numInstance);
+	static void						render_mesh(t_renderMeshData *mesh, t_renderGO *elem, uint32_t program, uint32_t numInstance);
 
 	static void						render_object(t_renderGO *elem, t_camera *camera);
 	static void						render_skybox(t_camera *camera);
@@ -127,7 +141,8 @@ private :
 
 	static void						render_vox_mesh(t_renderVox *elem, uint32_t program);
 	static void 					render_vox(t_renderVox *elem, t_camera *camera, uint32_t program);
-
+	static uint32_t					numInstance;
+	static t_instanceRenderer					instances[4096];
 };
 
 #endif

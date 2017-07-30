@@ -43,6 +43,7 @@ void 		basicFPSControl::render()
 
 void		basicFPSControl::mouse_update(float mouseX, float mouseY)
 {
+	return ;
 	mouseX = mouseX / (renderBuiltIn::get_mode()->width) - 0.5;
 	mouseY = mouseY / (renderBuiltIn::get_mode()->height) - 0.5;
 	rotx -= mouseX - relx;

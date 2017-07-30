@@ -6,6 +6,7 @@
 #include <basicLightFactory.class.hpp>
 #include <directorySmartLoader.class.hpp>
 #include <GUIEventSystem.class.hpp>
+#include <piawPlayerSpaceShip.class.hpp>
 
 void debut()
 {
@@ -15,4 +16,6 @@ void debut()
 	basicFPSControlManagerBuiltin::create(0, 0, 0, 0, 0, 1, 1);
 	renderBuiltIn::modify_skybox_light(1);
 	basicLightFactory::create(glm::vec3(0, 10, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), E_UNI, glm::vec3(1,1,1));
+	piawPlayerSpaceShip *elem = new piawPlayerSpaceShip();
+	piawLineEntityManager::push(elem);
 }
