@@ -6,7 +6,7 @@
 #include <fileLoader.class.hpp>
 #include <noise.h>
 
-#define MAX_RENDERGO (30960)
+#define MAX_RENDERGO (44960)
 
 class piawMap {
 

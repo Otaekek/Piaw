@@ -1,3 +1,4 @@
+
 #include <sys/time.h>
 #include "memory_allocator/stackAllocator.class.hpp"
 #include "static_memory_manager/staticMemoryManager.class.hpp"
@@ -33,6 +34,8 @@
 #include <piawLineEntity.class.hpp>
 #include <particleSystem.class.hpp>
 #include <piawMusic.class.hpp>
+#include <piawObstacle.class.hpp>
+#include <piawEnnemy.class.hpp>
 
 void init()
 {
@@ -66,6 +69,8 @@ void update()
 	piawMap::update();
 	piawLineEntityManager::update();
 	particleSystem::update();
+	piawObstacleSpawner::update();
+	piawEnnemySpawner::update();
 	staticMeshManager::update();
 	terrainGenerationBuiltin::update();
 	basicLightFactory::update();

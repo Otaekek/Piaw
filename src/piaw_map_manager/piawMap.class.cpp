@@ -26,7 +26,7 @@ void piawMap::shutdown() {
 }
 
 float piawMap::piawScale(glm::vec3 p1, glm::vec3 p2, uint32_t i) {
-	return (530);
+	return (280);
 }
 
 void piawMap::update() {
@@ -35,10 +35,10 @@ void piawMap::update() {
 	playerTransformHandler = basicFPSControlManagerBuiltin::get_main_handler();
 	t_transform *ptrs = transformBuiltin::get_transform(playerTransformHandler);
 	if (timeBuiltin::delta_time() > 0)
-		playerLinePos += timeBuiltin::delta_time() * 100;
+		playerLinePos += timeBuiltin::delta_time() * 200;
 	t_transform *t = transformBuiltin::get_transform(playerTransformHandler);
 	glm::vec3 p1 = get_point_at(playerLinePos), p2 = get_point_at(playerLinePos + 1);
-	while (pHead < playerLinePos + (3 * 120 * 1)) {
+	while (pHead < playerLinePos + (3 * 120 * 1.5)) {
 		sample_point(pHead++);
 	}
 
@@ -70,7 +70,7 @@ void piawMap::update() {
 glm::vec3 piawMap::get_point_at (uint32_t offset) {
 
 	glm::vec3 t;
-	return glm::vec3(200000 * sin((float)offset / 200) , 10000 * cos((float)offset / 150) * 2, offset * 1000) / 0.2f;
+	return glm::vec3(200000 * sin((float)offset / 200) , 10000 * cos((float)offset / 150) * 2, offset * 1000) / 0.6f;
 }
 
 uint32_t piawMap::push_renderGO(uint32_t assetHandler, uint32_t partransformHandlers) {
@@ -116,8 +116,8 @@ uint32_t cube = fileLoader::get_fs(std::string("assets/graphic/mesh/skyboxVelcor
  	 	//	cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 7] = (1.0f + sin((float)parPHead / 100)) / 2.0f;
   		//	cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 8] = ((float)cos((float)(i) / ((float)numCube / 6.28))  + 1)/ 2.0f;
 
-			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 6] = (1.0f + cos((float)parPHead / 100)) / 2.0f;
-			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 7] = fmod((right.x + p.z + up.y  + colorDefilerIndex)/ 80000, 1.0f) / 1.6;
-			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 8] = fmod((right.z * p.x + up.x * colorDefilerIndex) / 80000, 1.0f) / 1.6;
+			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 6] = (1.0f + cos((float)parPHead / 100)) /1.4f;
+			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 7] = fmod((right.x + p.z + up.y  + colorDefilerIndex)/ 80000, 1.0f) / 1.2;
+			cubeData[9 * (renderGoQHead % MAX_RENDERGO) + 8] = fmod((right.z * p.x + up.x * colorDefilerIndex) / 80000, 1.0f) / 1.2;
 	}
 }

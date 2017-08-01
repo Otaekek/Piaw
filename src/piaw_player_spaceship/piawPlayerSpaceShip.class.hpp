@@ -10,6 +10,7 @@ public:
 
 	void update();
 
+	sf::Sound		missileSound;
 private:
 
 	float	_camDist;
@@ -18,7 +19,6 @@ private:
 	void	speedUpdate();
 	float	upSpeed;
 	sf::SoundBuffer missileSoundBuffer;
-	sf::Sound		missileSound;
 	float	missileTimer[4];
 	float	rightSpeed;
 };

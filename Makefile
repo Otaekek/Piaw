@@ -37,6 +37,17 @@ LDFLAGS +=  -rdynamic
 # main
 SOURCES += main.cpp
 
+# piaw_ennemy
+SRC_SUBDIR += piaw_ennemy
+SOURCES += piawEnnemy.class.cpp
+SOURCES += piawEnnemyCruiser.class.cpp
+CFLAGS += -Isrc/piaw_ennemy
+
+# piaw_obstacle
+SRC_SUBDIR += piaw_obstacle
+SOURCES += piawObstacle.class.cpp
+CFLAGS += -Isrc/piaw_obstacle
+
 # piaw_music
 SRC_SUBDIR += piaw_music
 SOURCES += piawMusic.class.cpp

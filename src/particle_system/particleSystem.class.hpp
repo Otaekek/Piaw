@@ -1,6 +1,6 @@
 #include <renderBuiltIn.class.hpp>
 
-#define MAX_PARTICLE 6096
+#define MAX_PARTICLE 26096
 
 class particleSystem {
 

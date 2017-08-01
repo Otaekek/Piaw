@@ -5,7 +5,7 @@ piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
 //	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/Starcruiser military.obj", E_3D));
 	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/s.obj", E_3D));
 	transformBuiltin::scale(transformHandler, 80.5, 80.5, 80.5);
-	_camDist = 12.6;
+	_camDist = 32.6;
 	rightD = 0;
 	upD = 0;
     missileSoundBuffer.loadFromFile("assets/sound/piaw/soundEffect/piou.wav");
@@ -24,9 +24,9 @@ piawPlayerSpaceShip::~piawPlayerSpaceShip() {
 }
 
 void pupdate(float *d) {
-	d[6] /= 1.7 * 2;
-	d[7] /= 1.7 * 2;
-	d[8] /= 2.8 * 2;
+	d[6] /= 1.7 * 1;
+	d[7] /= 1.7 * 1;
+	d[8] /= 2.8 * 1;
 }
 
 void piawPlayerSpaceShip::generate_particle(glm::vec3 dir, t_transform *t) {
@@ -37,9 +37,9 @@ void piawPlayerSpaceShip::generate_particle(glm::vec3 dir, t_transform *t) {
 		pdata[0] = t->position.x + ((float)rand() / RAND_MAX) * 3450 + dir.x * 10 * (i + 2000);
 		pdata[1] = t->position.y+ ((float)rand() / RAND_MAX) * 3450 + dir.y * 10 * (i + 2000);
 		pdata[2] = t->position.z+ ((float)rand() / RAND_MAX) * 3450 + dir.z * 10 * (i + 2000);
-		pdata[3] = 92.5;
-		pdata[4] = 92.5;
-		pdata[5] = 92.5;
+		pdata[3] = 52.5;
+		pdata[4] = 52.5;
+		pdata[5] = 52.5;
 		pdata[6] = 20.0f;
 		pdata[7] = 4.0f;
 		pdata[8] = 4.0f;
@@ -60,9 +60,9 @@ void piawPlayerSpaceShip::key_update() {
 		rightSpeed -= d;
 	if (inputBuiltin::key_pressed[GLFW_KEY_P] && timeBuiltin::get_time() - missileTimer[0] > 0.07f) {
 		missileTimer[0] = timeBuiltin::get_time();
-		piawMissile* elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD + 0.1), 0, 2.5f);
+		piawMissile* elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD + 0.1), 0, 2.5f, 800, 1);
 		piawLineEntityManager::push(elem);
-		elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD - 0.1), 0, 2.5f);
+		elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD - 0.1), 0, 2.5f, 800, 1);
 		piawLineEntityManager::push(elem);
 		missileSound.play();
 	}
@@ -111,7 +111,7 @@ void piawPlayerSpaceShip::update() {
 	speedUpdate();
 	transformBuiltin::get_transform(transformHandler)->rotation = transformBuiltin::LookAtObject(-p1);
 	transformBuiltin::rotate(transformHandler, -p1, -rightSpeed);
-//	transformBuiltin::rotate(transformHandler, right, upSpeed);
+	transformBuiltin::rotate(transformHandler, right, upSpeed);
 	generate_particle(p1, t);
 	render();
 }

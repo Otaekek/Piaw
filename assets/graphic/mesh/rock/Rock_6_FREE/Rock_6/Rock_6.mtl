@@ -1,0 +1,9 @@
+newmtl Rock_6
+d 0.8
+Ns 0.75
+Ni 0
+Ka 0 0 0
+Kd 0 0 0
+Ks 1 1 1
+Km 0
+map_Kd ./Rock_6_Tex/Rock_6_d.png

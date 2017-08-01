@@ -9,12 +9,14 @@ public:
 	static void init();
 
 	piawMissile();
-	piawMissile(glm::vec3 parPos, uint32_t parTeam, float parLifeTime);
+	piawMissile(glm::vec3 parPos, uint32_t parTeam, float parLifeTime, float speed, float side);
 	~piawMissile();
 	void update();
 
 	static uint32_t StaticAssetHandler;
 
 	uint32_t team;
+	float speed;
+	float side;
 	float lifeTime;
 };
