@@ -37,6 +37,11 @@ LDFLAGS +=  -rdynamic
 # main
 SOURCES += main.cpp
 
+# piaw_music
+SRC_SUBDIR += piaw_music
+SOURCES += piawMusic.class.cpp
+CFLAGS += -Isrc/piaw_music
+
 #piawMap
 SRC_SUBDIR += piaw_map_manager
 SOURCES += piawMap.class.cpp
@@ -51,6 +56,11 @@ CFLAGS	+= -Isrc/cube_map
 # SOURCES += cubeMap.class.cpp
 SOURCES += perlinNoise.cpp
 # SOURCES += terrainGeneration.cpp
+
+# piaw missile
+SRC_SUBDIR += piaw_missile
+SOURCES += piawMissile.class.cpp
+CFLAGS += -Isrc/piaw_missile
 
 # Piaw line entity
 SRC_SUBDIR += piaw_line_entity
@@ -198,6 +208,9 @@ LIB_ASSIMP_PATH = assimp
 
 CFLAGS += -I$(LIB_ASSIMP_PATH)/include
 LDFLAGS += -L./$(LIB_ASSIMP_PATH)/lib/ -lassimp
+
+#sfml
+LDFLAGS += -lsfml-audio
 
 #  glm
 LIB_GLM_PATH = glm/glm/

@@ -127,7 +127,7 @@ void 			renderBuiltIn::init()
 	skyboxGO = renderBuiltIn::create();
 	skybox = get_renderGO(skyboxGO);
 	skybox->transformHandler = transformBuiltin::create();
-	transformBuiltin::scale(skybox->transformHandler, 1000, 1000, 1000);
+	transformBuiltin::scale(skybox->transformHandler, 10000, 10000, 10000);
 	glFrontFace(GL_CCW);
 //	init_vox();
 	printf("%s\n", glGetString(GL_VERSION));
@@ -273,14 +273,25 @@ void		renderBuiltIn::render_skybox(t_camera *camera)
 	camTransform = transformBuiltin::get_transform(camera->transformHandler);
 	skybox = renderBuiltIn::get_renderGO(skyboxGO);
 	skyboxTransform = transformBuiltin::get_transform(skybox->transformHandler);
-	skyboxTransform->position.x = -camTransform->position.x;
-	skyboxTransform->position.y = -camTransform->position.y;
-	skyboxTransform->position.z = -camTransform->position.z;
+	skyboxTransform->position.x = 0;//-camTransform->position.x;
+	skyboxTransform->position.y = 0;//-camTransform->position.y;
+	skyboxTransform->position.z = 0;//-camTransform->position.z;
 	node = (t_node*)staticMemoryManager::get_data_ptr(skybox->assetHandler);
 	glUseProgram(node->program);
 	GLuint location = glGetUniformLocation(node->program, "sunlight");
 	glUniform1f(location, skybox_light);
+	uint32_t a = transformBuiltin::create();
+	uint32_t b = camera->transformHandler;
+	//transformBuiltin::copy(b, a);
+	t_transform *t = transformBuiltin::get_transform(a);
+	t->rotation = transformBuiltin::get_transform(b)->rotation;
+	t->position.x = 0;
+	t->position.y = 0;
+	t->position.z = 0;
+
+	camera->transformHandler = a;
 	render_object(skybox, camera);
+	camera->transformHandler = b;
 	glEnable(GL_DEPTH_TEST);
 }
 

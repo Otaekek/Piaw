@@ -1,6 +1,8 @@
 #include <piawMap.class.hpp>
 #include <list>
 
+#pragma once
+
 class piawLineEntity {
 
 	public:

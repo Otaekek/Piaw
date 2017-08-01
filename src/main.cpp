@@ -32,6 +32,7 @@
 #include <piawMap.class.hpp>
 #include <piawLineEntity.class.hpp>
 #include <particleSystem.class.hpp>
+#include <piawMusic.class.hpp>
 
 void init()
 {
@@ -51,6 +52,7 @@ void init()
 	particleSystem::init();
 //	mapEditorBuiltin::init();
 	timeBuiltin::init();
+	piawMusic::init();
 	runtimeLibrary::create_lib("assets/levelBuilder/startEngine");
 }
 

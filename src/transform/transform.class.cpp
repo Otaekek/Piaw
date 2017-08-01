@@ -186,7 +186,6 @@ glm::quat transformBuiltin::CreateFromAxisAngle(glm::vec3 axis, float angle)
 	float halfAngle = angle * .5f;
 	float s = (float)sin(halfAngle);
 	glm::quat q;
-	printf("%f %f %f %f\n", axis.x, axis.y, axis.z, s);
 	q.x = axis.x * s;
 	q.y = axis.y * s;
 	q.z = axis.z * s;

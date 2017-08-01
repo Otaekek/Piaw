@@ -36,8 +36,7 @@ void piawLineEntity::get_transform() {
 	glm::vec3 dir = glm::normalize(p2 - p1),
 	up = glm::vec3(0, 1, 0),
 	right = glm::cross(dir, up), pos = p2 * x + p1 * (1.0f - x);
-
-	transform->position = pos + right * rightD + up * upD;
+	transform->position = pos + right * rightD * 54300.0f + up * upD * 34300.0f;
 }
 	
 void piawLineEntity::render() {
@@ -58,6 +57,6 @@ void piawLineEntityManager::update() {
 		(*it)->update();
 		++it;
 		if ((*tmp)->kill_me)
-			piawLineEntityManagerelems.erase(it);
+			piawLineEntityManagerelems.erase(tmp);
 	}
 }
