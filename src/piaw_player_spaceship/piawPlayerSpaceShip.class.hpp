@@ -18,6 +18,7 @@ private:
 	void 	key_update();
 	void	speedUpdate();
 	float	upSpeed;
+	float	rot;
 	sf::SoundBuffer missileSoundBuffer;
 	float	missileTimer[4];
 	float	rightSpeed;

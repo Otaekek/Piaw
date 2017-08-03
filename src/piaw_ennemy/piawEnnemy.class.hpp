@@ -1,6 +1,6 @@
+#pragma once
 #include <piawLineEntity.class.hpp>
 
-#pragma once
 
 enum E_ENNEMYTYPE {
 	E_CRUISER,

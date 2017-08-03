@@ -1,5 +1,5 @@
-#include "piawEnnemy.class.hpp"
 #pragma once
+#include "piawEnnemy.class.hpp"
 class piawEnnemyCruiser : public piawEnnemy {
 
 public:

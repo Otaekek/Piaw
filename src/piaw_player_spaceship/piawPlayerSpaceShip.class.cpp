@@ -13,6 +13,7 @@ piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
 	upD = 0;
     missileSoundBuffer.loadFromFile("assets/sound/piaw/soundEffect/piou.wav");
 	missileSound.setBuffer(missileSoundBuffer);
+	rot = 0;
 }
 
 
@@ -61,6 +62,10 @@ void piawPlayerSpaceShip::key_update() {
 		rightSpeed += d;
 	if (inputBuiltin::key_pressed[GLFW_KEY_A])
 		rightSpeed -= d;
+	if (inputBuiltin::key_pressed[GLFW_KEY_L]) {
+		rot += d * 10;
+		rot = fmod(rot, 6.28);
+	}
 	if (inputBuiltin::key_pressed[GLFW_KEY_P] && timeBuiltin::get_time() - missileTimer[0] > 0.07f) {
 		missileTimer[0] = timeBuiltin::get_time();
 		piawMissile* elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD + 0.1), 0, 2.5f, 800, 1);
@@ -101,12 +106,13 @@ void piawPlayerSpaceShip::speedUpdate() {
 
 	rightSpeed /= 1.01f;
 	upSpeed /= 1.01f;
+	if (rot > 0)
+		rot -= 0.04f;
 }
 
-	float ae = 0;
 void piawPlayerSpaceShip::update() {
 	glm::vec3 aat[3] = {glm::vec3(1, 0, 0), glm::vec3(0, 1, 0), glm::vec3(0, 0, 1)};
-	//ae += 0.01;
+
 	linePos = piawMap::playerLinePos + _camDist;
 	get_transform();
 	glm::vec3 p1 = piawMap::get_point_at((uint32_t)linePos + 51), p2 = piawMap::get_point_at((uint32_t)(linePos) + 52);
@@ -116,8 +122,9 @@ void piawPlayerSpaceShip::update() {
 	key_update();
 	speedUpdate();
 	transformBuiltin::get_transform(transformHandler)->rotation = transformBuiltin::LookAtObject(-p1);
-	transformBuiltin::rotate(transformHandler, -p1, -rightSpeed);
-	transformBuiltin::rotate(transformHandler, right, upSpeed + ae);
+	transformBuiltin::rotate(transformHandler, -p1, -(rightSpeed));
+	transformBuiltin::rotate(transformHandler, right, upSpeed);
+	transformBuiltin::rotate_model(transformHandler, p1, rot);
 	generate_particle(p1, t);
 	a = new obb(glm::vec3(10000, 1000, 10000), aat, transformBuiltin::get_transform(transformHandler)->position);
 	a->from_quat(transformBuiltin::get_transform(transformHandler)->rotation);

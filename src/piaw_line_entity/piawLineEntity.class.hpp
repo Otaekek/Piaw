@@ -1,6 +1,7 @@
 #include <piawMap.class.hpp>
 #include <list>
 #include <oob.class.hpp>
+//#include <piawEnnemyCruiser.class.hpp>
 
 #pragma once
 
@@ -17,6 +18,8 @@ class piawLineEntity {
 
 	virtual void update();
 
+//	virtual void	getHitBy(piawEnnemyCruiser *b) {};
+//	void			hit(piawLineEntity *a) {a->getHitBy(this)};
 
 	float	linePos;
 	float	upD;
