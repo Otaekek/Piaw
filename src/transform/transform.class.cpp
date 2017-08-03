@@ -199,6 +199,7 @@ glm::quat transformBuiltin::LookAt(glm::vec3 d)
 
 	float dot = glm::dot(glm::vec3(0, 0, 1), d);
 
+/*
 	if (fabs(dot - (-1.0f)) < 0.000001f)
 	{
 		return glm::quat(0, 1, 0, 3.1415926535897932f);
@@ -207,7 +208,7 @@ glm::quat transformBuiltin::LookAt(glm::vec3 d)
 	{
 		return glm::quat();
 	}
-
+*/
 	float rotAngle = (float)acos(dot);
 	glm::vec3 rotAxis = glm::normalize(glm::cross(glm::vec3(0, 0, 1), d));
 	return CreateFromAxisAngle(rotAxis, rotAngle);
@@ -219,7 +220,7 @@ glm::quat transformBuiltin::LookAtObject(glm::vec3 d)
 	d = glm::normalize(d);
 
 	float dot = glm::dot(glm::vec3(0, 0, 1), d);
-
+/*
 	if (fabs(dot - (-1.0f)) < 0.000001f)
 	{
 		return glm::quat(0, 1, 0, 3.1415926535897932f);
@@ -228,7 +229,7 @@ glm::quat transformBuiltin::LookAtObject(glm::vec3 d)
 	{
 		return glm::quat();
 	}
-
+*/
 	float rotAngle = (float)acos(dot);
 	glm::vec3 rotAxis = glm::normalize(glm::cross(glm::vec3(0, 0, 1), d));
 	return CreateFromAxisAngle(rotAxis, -rotAngle);

@@ -32,9 +32,9 @@ void piawEnnemyCruiser::update() {
 	transformBuiltin::get_transform(transformHandler)->rotation = transformBuiltin::LookAtObject(p);
 	transformBuiltin::rotate_model(transformHandler, glm::vec3(0, 1, 0), -1.35);
 	transformBuiltin::rotate_model(transformHandler, p, -1.6);
-	if (!(rand() % 100)) {
-		rightSpeed += (float)rand() / RAND_MAX - 0.5;
-		upSpeed += (float)rand() / RAND_MAX - 0.5;
+	if (!(rand() % 50)) {
+		rightSpeed += ((float)rand() / RAND_MAX - 0.5);
+		upSpeed += ((float)rand() / RAND_MAX - 0.5) ;
 	}
 	shoot();
 	transformBuiltin::rotate_model(transformHandler, -p, -rightSpeed);

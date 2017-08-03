@@ -37,6 +37,11 @@ LDFLAGS +=  -rdynamic
 # main
 SOURCES += main.cpp
 
+#oob
+SRC_SUBDIR += oob
+SOURCES += oob.class.cpp
+CFLAGS += -Isrc/oob
+
 # piaw_ennemy
 SRC_SUBDIR += piaw_ennemy
 SOURCES += piawEnnemy.class.cpp

@@ -1,5 +1,8 @@
 #include "piawPlayerSpaceShip.class.hpp"
 #include <particleSystem.class.hpp>
+#include <oob.class.hpp>
+
+obb *a;
 
 piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
 //	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/Starcruiser military.obj", E_3D));
@@ -24,9 +27,9 @@ piawPlayerSpaceShip::~piawPlayerSpaceShip() {
 }
 
 void pupdate(float *d) {
-	d[6] /= 1.7 * 1;
-	d[7] /= 1.7 * 1;
-	d[8] /= 2.8 * 1;
+	d[6] /= 1.7 * 1.1;
+	d[7] /= 1.7 * 1.1;
+	d[8] /= 2.8 * 1.1;
 }
 
 void piawPlayerSpaceShip::generate_particle(glm::vec3 dir, t_transform *t) {
@@ -100,7 +103,10 @@ void piawPlayerSpaceShip::speedUpdate() {
 	upSpeed /= 1.01f;
 }
 
+	float ae = 0;
 void piawPlayerSpaceShip::update() {
+	glm::vec3 aat[3] = {glm::vec3(1, 0, 0), glm::vec3(0, 1, 0), glm::vec3(0, 0, 1)};
+	//ae += 0.01;
 	linePos = piawMap::playerLinePos + _camDist;
 	get_transform();
 	glm::vec3 p1 = piawMap::get_point_at((uint32_t)linePos + 51), p2 = piawMap::get_point_at((uint32_t)(linePos) + 52);
@@ -111,7 +117,10 @@ void piawPlayerSpaceShip::update() {
 	speedUpdate();
 	transformBuiltin::get_transform(transformHandler)->rotation = transformBuiltin::LookAtObject(-p1);
 	transformBuiltin::rotate(transformHandler, -p1, -rightSpeed);
-	transformBuiltin::rotate(transformHandler, right, upSpeed);
+	transformBuiltin::rotate(transformHandler, right, upSpeed + ae);
 	generate_particle(p1, t);
+	a = new obb(glm::vec3(10000, 1000, 10000), aat, transformBuiltin::get_transform(transformHandler)->position);
+	a->from_quat(transformBuiltin::get_transform(transformHandler)->rotation);
+	a->render();
 	render();
 }
