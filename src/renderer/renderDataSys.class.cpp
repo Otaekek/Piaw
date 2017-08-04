@@ -174,7 +174,7 @@ void 		renderDataSys::handle_texture(aiTextureType type, char *path, aiMaterial 
 		strcat(completePath, texturePath.C_Str());
 		back_slash(completePath);
 		try_path(completePath);
-		textureID = fileLoader::load_fs_asset_sync(completePath, 1);
+		textureID = fileLoader::load_fs_asset_sync(completePath, E_TEXTURE);
 		*has_text = false;
 		if (staticMemoryManager::get_asset_state(textureID) != staticMemoryManager::E_LOADED)
 			return ;

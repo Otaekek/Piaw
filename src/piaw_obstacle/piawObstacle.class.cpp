@@ -1,3 +1,4 @@
+
 #include "piawObstacle.class.hpp"
 #include <piawLineEntity.class.hpp>
 #include <piawMap.class.hpp>
@@ -22,6 +23,9 @@ piawObstacle::~piawObstacle() {
 void piawObstacle::update() {
 	lifeTime -= timeBuiltin::delta_time();
 	get_transform();
+	set_collider(glm::vec3(10000, 10000, 10000));
+	render_collider();
+	physic_update();
 	render();
 //	if (life)
 }

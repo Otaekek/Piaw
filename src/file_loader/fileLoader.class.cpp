@@ -35,6 +35,7 @@ void fileLoader::init()
 	extension_to_function["TGA"] = &texture_builtin::load_texture;
 	extension_to_function["dds"] = &texture_builtin::load_texture;
 	extension_to_function["psd"] = &texture_builtin::load_texture;
+	extension_to_function["wav"] = &soundBuiltin::loadSound;
 
 	ext_to_type["obj"] = E_3D;
 	ext_to_type["C4D"] = E_3D;
@@ -55,6 +56,7 @@ void fileLoader::init()
 	ext_to_type["TGA"] = E_TEXTURE;
 	ext_to_type["dds"] = E_TEXTURE;
 	ext_to_type["psd"] = E_TEXTURE;
+	ext_to_type["wav"] = E_SOUND;
 }
 
 fileLoader::~fileLoader()

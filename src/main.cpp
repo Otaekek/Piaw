@@ -37,6 +37,7 @@
 #include <piawObstacle.class.hpp>
 #include <piawEnnemy.class.hpp>
 #include <oob.class.hpp>
+#include <piawPhysic.class.hpp>
 
 void init()
 {
@@ -48,16 +49,17 @@ void init()
 	renderBuiltIn::init();
 	jobHandler::init();
 	renderDataSys::init();
+	obb::init();
 	inputBuiltin::init();
 //	voxPhysic::init();
 //	cubeMap::init();
+	piawPhysic::init();
 	basicFPSControlManagerBuiltin::init();
 	piawMap::init();
 	particleSystem::init();
 //	mapEditorBuiltin::init();
 	timeBuiltin::init();
 	piawMusic::init();
-	obb::init();
 	runtimeLibrary::create_lib("assets/levelBuilder/startEngine");
 }
 
@@ -73,6 +75,7 @@ void update()
 	particleSystem::update();
 	piawObstacleSpawner::update();
 	piawEnnemySpawner::update();
+	piawPhysic::update();
 	staticMeshManager::update();
 	terrainGenerationBuiltin::update();
 	basicLightFactory::update();

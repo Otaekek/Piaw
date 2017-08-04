@@ -38,6 +38,9 @@ void piawEnnemyCruiser::update() {
 	}
 	shoot();
 	transformBuiltin::rotate_model(transformHandler, -p, -rightSpeed);
+	set_collider(glm::vec3(20000, 20000, 2000));
+	render_collider();
+	physic_update();
 	speedUpdate();
 	render();
 }

@@ -2,8 +2,6 @@
 #include <particleSystem.class.hpp>
 #include <oob.class.hpp>
 
-obb *a;
-
 piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
 //	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/Starcruiser military.obj", E_3D));
 	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/s.obj", E_3D));
@@ -11,9 +9,8 @@ piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
 	_camDist = 32.6;
 	rightD = 0;
 	upD = 0;
-    missileSoundBuffer.loadFromFile("assets/sound/piaw/soundEffect/piou.wav");
-	missileSound.setBuffer(missileSoundBuffer);
 	rot = 0;
+	soundHandler = fileLoader::load_fs_asset_sync("assets/sound/piaw/soundEffect/piou.wav", E_SOUND);
 }
 
 
@@ -72,7 +69,8 @@ void piawPlayerSpaceShip::key_update() {
 		piawLineEntityManager::push(elem);
 		elem = new piawMissile(glm::vec3(linePos + 6, upD, rightD - 0.1), 0, 2.5f, 800, 1);
 		piawLineEntityManager::push(elem);
-		missileSound.play();
+		((t_sound*)staticMemoryManager::get_data_ptr(soundHandler))->sound->play();
+//		missileSound.play();
 	}
 	if (rightSpeed >= 1.0f)
 		rightSpeed = 1.0f;
@@ -126,8 +124,9 @@ void piawPlayerSpaceShip::update() {
 	transformBuiltin::rotate(transformHandler, right, upSpeed);
 	transformBuiltin::rotate_model(transformHandler, p1, rot);
 	generate_particle(p1, t);
-	a = new obb(glm::vec3(10000, 1000, 10000), aat, transformBuiltin::get_transform(transformHandler)->position);
-	a->from_quat(transformBuiltin::get_transform(transformHandler)->rotation);
-	a->render();
+
+	set_collider(glm::vec3(10000, 1000, 10000));
+	render_collider();
+	physic_update();
 	render();
 }

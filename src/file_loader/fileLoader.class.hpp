@@ -19,11 +19,13 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <soundBuiltin.class.hpp>
 
 typedef struct 			s_loadHeader {
 	uint32_t 			ref;
 	uint32_t			cluster;
 	char				path[1024];
+	char				opt[256];
 }						t_loadHeader;
 
 enum e_asset_type {

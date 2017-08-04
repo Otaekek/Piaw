@@ -1,9 +1,10 @@
+#pragma once
+
 #include <piawMap.class.hpp>
 #include <list>
-#include <oob.class.hpp>
+#include <piawPhysic.class.hpp>
 //#include <piawEnnemyCruiser.class.hpp>
 
-#pragma once
 
 class piawLineEntity {
 
@@ -12,25 +13,32 @@ class piawLineEntity {
 	piawLineEntity();
 	~piawLineEntity();
 
+	void set_collider(glm::vec3 scale);
+	void render_collider();
+
 	void get_transform();
 	void set_asset(uint32_t asset);
 	virtual void render();
+	virtual void physic_update();
 
 	virtual void update();
 
-//	virtual void	getHitBy(piawEnnemyCruiser *b) {};
-//	void			hit(piawLineEntity *a) {a->getHitBy(this)};
+	virtual void		getHitBy(piawLineEntity *b) {life--; if (life <= 0 ) kill_me = true;}
+	virtual uint32_t	getType() {return 0;}
 
-	float	linePos;
-	float	upD;
-	float	rightD;
-	bool	kill_me;
+	void		phy_render() {};
+	float		linePos;
+	float		upD;
+	float		rightD;
+	uint32_t	life;
+	bool		kill_me;
 
 	protected:
 
 		uint32_t assetHandler;
 		uint32_t transformHandler;
 		uint32_t renderGoHandler;
+		uint32_t physicHandler;
 };
 
 class piawLineEntityManager {

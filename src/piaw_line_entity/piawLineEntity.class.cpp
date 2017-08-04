@@ -3,17 +3,28 @@
 std::list<piawLineEntity*> piawLineEntityManagerelems;
 
 piawLineEntity::piawLineEntity() {
+	life = 10;
+	obb o = obb();
 	kill_me = false;
 	transformHandler = transformBuiltin::create();
 	renderGoHandler = renderBuiltIn::create();
+	physicHandler = piawPhysic::create(o, 0, this);
+	piawPhysic::get_collider(physicHandler)->c.init_render();
 }
 
 piawLineEntity::~piawLineEntity() {
-
+	transformBuiltin::destroy(transformHandler);
+	renderBuiltIn::destroy(renderGoHandler);
+	piawPhysic::get_collider(physicHandler)->c.shutdown_render();
+	piawPhysic::destroy(physicHandler);
 }
 
 void piawLineEntity::update() {
 
+}
+
+void piawLineEntity::physic_update() {
+	piawPhysic::push(physicHandler);
 }
 
 void piawLineEntity::set_asset(uint32_t asset) {
@@ -38,7 +49,17 @@ void piawLineEntity::get_transform() {
 	right = glm::cross(dir, up), pos = p2 * x + p1 * (1.0f - x);
 	transform->position = pos + right * rightD * 54300.0f + up * upD * 34300.0f;
 }
-	
+
+void piawLineEntity::set_collider(glm::vec3 scale) {
+	piawPhysic::get_collider(physicHandler)->c.r = scale;
+	piawPhysic::get_collider(physicHandler)->c.from_quat(transformBuiltin::get_transform(transformHandler)->rotation);
+	piawPhysic::get_collider(physicHandler)->c.pos = transformBuiltin::get_transform(transformHandler)->position;
+}
+
+void piawLineEntity::render_collider() {
+	piawPhysic::get_collider(physicHandler)->c.render();
+}
+
 void piawLineEntity::render() {
 	renderBuiltIn::render_me(renderGoHandler);
 }

@@ -37,6 +37,16 @@ LDFLAGS +=  -rdynamic
 # main
 SOURCES += main.cpp
 
+#piaw_physic
+SRC_SUBDIR += piaw_physic
+CFLAGS += -Isrc/piaw_physic
+SOURCES += piawPhysic.class.cpp
+
+#sound
+SRC_SUBDIR += sound_builtin
+CFLAGS += -Isrc/sound_builtin
+SOURCES += soundBuiltin.class.cpp
+
 #oob
 SRC_SUBDIR += oob
 SOURCES += oob.class.cpp

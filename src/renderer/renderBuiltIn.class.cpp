@@ -93,10 +93,10 @@ void			renderBuiltIn::create_framebuffer()
 void 			renderBuiltIn::init()
 {
 	t_renderGO *skybox;
-	cluster_id = dynamicMemoryManager::cluster_init(sizeof(t_renderGO), 65536);
+	cluster_id = dynamicMemoryManager::cluster_init(sizeof(t_renderGO), 65536 * 10);
 	camCluster_id = dynamicMemoryManager::cluster_init(sizeof(t_camera), 4096);
 	lightClusterId = dynamicMemoryManager::cluster_init(sizeof(t_light), 4096);
-	vox_cluster_id =  dynamicMemoryManager::cluster_init(sizeof(t_renderVox), 65536 * 10);
+//	vox_cluster_id =  dynamicMemoryManager::cluster_init(sizeof(t_renderVox), 65536 * 10);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

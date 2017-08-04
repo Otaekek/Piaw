@@ -1,6 +1,7 @@
 #include <piawMissile.class.hpp>
 #include <piawLineEntity.class.hpp>
 #include <SFML/Audio.hpp>
+#include <staticMemoryManager.class.hpp>
 
 class piawPlayerSpaceShip: public piawLineEntity {
 public:
@@ -10,7 +11,6 @@ public:
 
 	void update();
 
-	sf::Sound		missileSound;
 private:
 
 	float	_camDist;
@@ -19,7 +19,8 @@ private:
 	void	speedUpdate();
 	float	upSpeed;
 	float	rot;
-	sf::SoundBuffer missileSoundBuffer;
+
 	float	missileTimer[4];
 	float	rightSpeed;
+	uint32_t	soundHandler;
 };

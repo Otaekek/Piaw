@@ -13,7 +13,8 @@ public:
 
 	obb();
 	obb(glm::vec3 parR, glm::vec3 parAxis[3], glm::vec3 parPos);
-
+	void init_render();
+	void shutdown_render();
 	~obb();
 
 	bool		intersect(obb &b);

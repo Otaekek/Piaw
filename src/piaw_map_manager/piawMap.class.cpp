@@ -36,6 +36,7 @@ void piawMap::update() {
 	t_transform *ptrs = transformBuiltin::get_transform(playerTransformHandler);
 	if (timeBuiltin::delta_time() > 0)
 		playerLinePos += timeBuiltin::delta_time() * 200;
+	printf("%f\n", playerLinePos);
 	t_transform *t = transformBuiltin::get_transform(playerTransformHandler);
 	glm::vec3 p1 = get_point_at(playerLinePos), p2 = get_point_at(playerLinePos + 1);
 	while (pHead < playerLinePos + (3 * 120 * 1.5)) {
@@ -53,9 +54,9 @@ void piawMap::update() {
 	const int min = MAX_RENDERGO < renderGoQHead ? MAX_RENDERGO : renderGoQHead;
 	for (int i = 0; i < min; i++) {
 		t_transform *t = transformBuiltin::get_transform(renderBuiltIn::get_renderGO(renderGoQ[i % MAX_RENDERGO])->transformHandler);
-		cubeData[i * 9 + 0] = t->position.x + 400 * (float)rand() / RAND_MAX;;
-		cubeData[i * 9 + 1] = t->position.y + 400 * (float)rand() / RAND_MAX;;
-		cubeData[i * 9 + 2] = t->position.z + 400 * (float)rand() / RAND_MAX;;
+		cubeData[i * 9 + 0] = t->position.x + 00 * (float)rand() / RAND_MAX;;
+		cubeData[i * 9 + 1] = t->position.y + 00 * (float)rand() / RAND_MAX;;
+		cubeData[i * 9 + 2] = t->position.z + 00 * (float)rand() / RAND_MAX;;
 		float s = piawScale(t->position, -ptrs->position, i) * 2;
 //		s = 60 * (float)rand() / RAND_MAX;
 		//s = 60;
@@ -70,6 +71,7 @@ void piawMap::update() {
 glm::vec3 piawMap::get_point_at (uint32_t offset) {
 
 	glm::vec3 t;
+
 	return glm::vec3(200000 * sin((float)offset / 200) , 10000 * cos((float)offset / 150) * 2, offset * 1000) / 0.6f;
 }
 

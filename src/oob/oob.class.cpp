@@ -7,34 +7,28 @@ void obb::init() {
 }
 
 obb::obb() {
-	renderGoHandler = renderBuiltIn::create();
-	transformHandler = renderBuiltIn::create();
-	renderBuiltIn::get_renderGO(renderGoHandler)->transformHandler = transformHandler;
-	renderBuiltIn::get_renderGO(renderGoHandler)->assetHandler = assetHandler;
+
+}
+obb::~obb() {
 }
 
-obb::obb(glm::vec3 parR, glm::vec3 parAxis[3], glm::vec3 parPos) {
+void obb::init_render() {
 	renderGoHandler = renderBuiltIn::create();
 	transformHandler = transformBuiltin::create();
-	memcpy(axis, parAxis, sizeof(glm::vec3) * 3);
-	r = parR;
-	pos = parPos;
 	renderBuiltIn::get_renderGO(renderGoHandler)->transformHandler = transformHandler;
 	renderBuiltIn::get_renderGO(renderGoHandler)->assetHandler = assetHandler;
 }
 
-obb::~obb() {
-	if (renderGoHandler)
-		renderBuiltIn::destroy(renderGoHandler);
-	if (transformHandler)
-		transformBuiltin::destroy(transformHandler);
+void obb::shutdown_render() {
+	renderBuiltIn::destroy(renderGoHandler);
+	transformBuiltin::destroy(transformHandler);
 }
 
 bool		obb::intersect(obb &obb) {
-	if (glm::distance(obb.pos, pos) > obb.maxSphere().w + maxSphere().w)
-		return false;
-	if (glm::distance(obb.pos, pos) < obb.minSphere().w + minSphere().w)
-		return true;
+//	if (glm::distance(obb.pos, pos) > obb.maxSphere().w + maxSphere().w)
+//		return false;
+//	if (glm::distance(obb.pos, pos) < obb.minSphere().w + minSphere().w)
+//		return true;
 	return s_a_t(obb);
 }
 
@@ -48,7 +42,6 @@ glm::vec4	obb::maxSphere() {
 
 void obb::set_transform() {
 	//transformBuiltin::LookAtObject(-glm::cross(axis[0], axis[2]));
-
 	transformBuiltin::get_transform(transformHandler)->rotation = glm::lookAt(glm::vec3(0,0,0), axis[2], axis[1]);
 	//glm::lookAt(position, lookAtPt, up);
 	transformBuiltin::get_transform(transformHandler)->position = pos;
@@ -57,7 +50,9 @@ void obb::set_transform() {
 }
 
 uint32_t	obb::render() {
+	return 0;
 	set_transform();
+	renderBuiltIn::get_renderGO(renderGoHandler)->assetHandler = assetHandler;
 	renderBuiltIn::render_me(renderGoHandler);
 }
 
