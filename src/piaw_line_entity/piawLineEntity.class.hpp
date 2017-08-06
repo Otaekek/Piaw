@@ -4,7 +4,7 @@
 #include <list>
 #include <piawPhysic.class.hpp>
 //#include <piawEnnemyCruiser.class.hpp>
-
+#include <particleSystem.class.hpp>
 
 class piawLineEntity {
 
@@ -18,6 +18,9 @@ class piawLineEntity {
 
 	void get_transform();
 	void set_asset(uint32_t asset);
+
+	virtual void 	particleOnDie(float n);
+
 	virtual void render();
 	virtual void physic_update();
 

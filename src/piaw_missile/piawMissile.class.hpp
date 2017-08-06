@@ -13,6 +13,7 @@ public:
 	~piawMissile();
 	void update();
 
+	void getHitBy(piawLineEntity *b);
 	static uint32_t StaticAssetHandler;
 
 	uint32_t team;

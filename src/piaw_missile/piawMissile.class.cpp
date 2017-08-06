@@ -37,3 +37,9 @@ void piawMissile::update() {
 	physic_update();
 	render();
 }
+
+void piawMissile::getHitBy(piawLineEntity *b) {
+	((t_sound*)staticMemoryManager::get_data_ptr(fileLoader::load_fs_asset_sync("assets/sound/piaw/soundEffect/cu.wav", E_SOUND)))->sound->play();
+	particleOnDie(5000);
+	kill_me = true;
+}

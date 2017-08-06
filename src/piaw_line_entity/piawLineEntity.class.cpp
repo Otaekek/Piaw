@@ -3,7 +3,7 @@
 std::list<piawLineEntity*> piawLineEntityManagerelems;
 
 piawLineEntity::piawLineEntity() {
-	life = 10;
+	life = 30;
 	obb o = obb();
 	kill_me = false;
 	transformHandler = transformBuiltin::create();
@@ -21,6 +21,45 @@ piawLineEntity::~piawLineEntity() {
 
 void piawLineEntity::update() {
 
+}
+
+void pexplosion(float *d, char *o) {
+	d[6] /= 1.7 * 0.8;
+	d[7] /= 1.7 * 0.8;
+	d[8] /= 2.8 * 0.8;
+
+	d[0] += *(float*)(o) / 0.4f;
+	d[1] += *(float*)(o + sizeof(float)) / 0.4f;
+	d[2] += *(float*)(o + sizeof(float) * 2) / 0.4f;
+}
+
+void piawLineEntity::particleOnDie(float n) {
+
+	float pdata[9] = {0};
+
+	char podata[64];
+
+	t_transform *t = transformBuiltin::get_transform(transformHandler);
+
+	for (int i = 0; i < n; i++) {
+		pdata[0] = t->position.x + ((float)rand() / RAND_MAX) * 3450 - 1500;
+		pdata[1] = t->position.y + ((float)rand() / RAND_MAX) * 3450 - 1500;
+		pdata[2] = t->position.z + ((float)rand() / RAND_MAX) * 3450 - 1500;
+		float a =  ((float)rand() / RAND_MAX + 0) * 500.0f - 300.0f;
+		float b =  ((float)rand() / RAND_MAX + 0) * 500.0f - 300.0f;
+		float c =  ((float)rand() / RAND_MAX + 0) * 500.0f - 300.0f;
+		memcpy(podata + sizeof(float) * 0, &a, sizeof(float));
+		memcpy(podata + sizeof(float) * 1, &b, sizeof(float));
+		memcpy(podata + sizeof(float) * 2, &c, sizeof(float));
+
+		pdata[3] = 182.5;
+		pdata[4] = 182.5;
+		pdata[5] = 182.5;
+		pdata[6] = 20.0f;
+		pdata[7] = 4.0f;
+		pdata[8] = 4.0f;
+		particleSystem::push(pdata, pexplosion, podata);
+	}
 }
 
 void piawLineEntity::physic_update() {

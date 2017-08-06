@@ -24,7 +24,7 @@ piawPlayerSpaceShip::~piawPlayerSpaceShip() {
 
 }
 
-void pupdate(float *d) {
+void pupdate(float *d, char *od) {
 	d[6] /= 1.7 * 1.1;
 	d[7] /= 1.7 * 1.1;
 	d[8] /= 2.8 * 1.1;
@@ -32,7 +32,9 @@ void pupdate(float *d) {
 
 void piawPlayerSpaceShip::generate_particle(glm::vec3 dir, t_transform *t) {
 
-	float pdata[9] = {100};
+	float	pdata[9] = {100};
+	char	podata[64] = {0};
+	float plifeTime = 1.0f;
 
 	for (int i = 0; i < timeBuiltin::delta_time() * 95000; i++) {
 		pdata[0] = t->position.x + ((float)rand() / RAND_MAX) * 3450 + dir.x * 10 * (i + 2000);
@@ -44,7 +46,8 @@ void piawPlayerSpaceShip::generate_particle(glm::vec3 dir, t_transform *t) {
 		pdata[6] = 20.0f;
 		pdata[7] = 4.0f;
 		pdata[8] = 4.0f;
-		particleSystem::push(pdata, pupdate);
+		memcpy(podata, &plifeTime, sizeof(float));
+		particleSystem::push(pdata, pupdate, podata);
 	}
 }
 

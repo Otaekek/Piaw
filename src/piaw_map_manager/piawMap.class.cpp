@@ -35,8 +35,7 @@ void piawMap::update() {
 	playerTransformHandler = basicFPSControlManagerBuiltin::get_main_handler();
 	t_transform *ptrs = transformBuiltin::get_transform(playerTransformHandler);
 	if (timeBuiltin::delta_time() > 0)
-		playerLinePos += timeBuiltin::delta_time() * 200;
-	printf("%f\n", playerLinePos);
+		playerLinePos += timeBuiltin::delta_time() * 300;
 	t_transform *t = transformBuiltin::get_transform(playerTransformHandler);
 	glm::vec3 p1 = get_point_at(playerLinePos), p2 = get_point_at(playerLinePos + 1);
 	while (pHead < playerLinePos + (3 * 120 * 1.5)) {
