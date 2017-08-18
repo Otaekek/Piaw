@@ -3,11 +3,12 @@
 #include <oob.class.hpp>
 
 piawPlayerSpaceShip::piawPlayerSpaceShip(): missileTimer {0}, piawLineEntity() {
-//	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/Starcruiser military.obj", E_3D));
-	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/s.obj", E_3D));
+	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/Starcruiser military.obj", E_3D));
+//	set_asset(fileLoader::load_fs_asset_sync("assets/graphic/mesh/starcruiser military/s.obj", E_3D));
 	transformBuiltin::scale(transformHandler, 80.5, 80.5, 80.5);
-	_camDist = 32.6;
+	_camDist = 42.6;
 	rightD = 0;
+	life = 5000;
 	upD = 0;
 	rot = 0;
 	soundHandler = fileLoader::load_fs_asset_sync("assets/sound/piaw/soundEffect/piou.wav", E_SOUND);

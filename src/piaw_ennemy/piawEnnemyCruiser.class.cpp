@@ -42,7 +42,7 @@ void piawEnnemyCruiser::update() {
 	}
 	else {
 		upSpeed -= timeBuiltin::delta_time();
-		transformBuiltin::rotate(transformHandler, glm::vec3(1, 0, 0), timeBuiltin::get_time() / 10.0f);
+		transformBuiltin::rotate(transformHandler, glm::vec3(1, 0, 0), timeBuiltin::get_time() / 0.1f);
 		if (timeBuiltin::get_time() - weaponTimer[1] > 0.05f) {
 			particleOnDie(1000);
 			weaponTimer[1] = timeBuiltin::get_time();
